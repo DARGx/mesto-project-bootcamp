@@ -7,8 +7,12 @@
     align-self: center;
     margin: 0 20px 0 0;
     cursor: pointer;
+    background-image: url(../../../images/cards/sign-like.svg);
+    transition: all .25s ease-in-out;
+    background-size: 22px 19px;
 }
 
-.card__button-like:hover {
+.card__buttom-like:hover {
     opacity: .5;
 }
+

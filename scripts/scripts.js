@@ -10,8 +10,8 @@ const popupGlobal = document.querySelector('.popup');
 const formChangeProfile = document.querySelector('.form-profile')
 const formAddCard = document.querySelector('.form-card');
 
-const buttonAddCard = document.querySelector('.profile__buttom-add');
-const buttonChangeDescription = document.querySelector('.profile__buttom-change-descrition');
+const buttonAddCard = document.querySelector('.profile__button-add');
+const buttonChangeDescription = document.querySelector('.profile__button-change-descrition');
 
 const profileTitle = document.querySelector('.profile__title');
 const profileSubtitle = document.querySelector('.profile__subtitle');
@@ -62,15 +62,15 @@ function deleteCard(event) {
 }
 
 function LikeCard(event) {
-  event.target.classList.toggle('card__buttom-like_active');
+  event.target.classList.toggle('card__button-like_active');
 }
 
 function createCard(card) {
     const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
     const cardElementImage = cardElement.querySelector('.card__image');
     const cardElementTitle = cardElement.querySelector('.card__title');
-    const cardButtonLike = cardElement.querySelector('.card__buttom-like');
-    const cardButtonDelete = cardElement.querySelector('.card__buttom-delete');
+    const cardButtonLike = cardElement.querySelector('.card__button-like');
+    const cardButtonDelete = cardElement.querySelector('.card__button-delete');
 
     cardElementImage.src = card.link;
     cardElementImage.alt = card.name;
@@ -95,7 +95,7 @@ function addCard(cardsList, currentCard) {
 }
 
 function addEventListeners() {
-  document.querySelectorAll('.popup__buttom-hide')
+  document.querySelectorAll('.popup__button-hide')
   .forEach((button) => {
     const popup = button.closest('.popup');
     button.addEventListener('click', () => {
