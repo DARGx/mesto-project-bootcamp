@@ -13,105 +13,86 @@
     <div class="page">
 
         <header class="header">
-            <img class="header__logo" src="./images/header/logo-mesto.png" alt="Логотип проекта">
+            <img class="header__logo" src="./images/header/logo-mesto.svg" alt="Логотип проекта место">
         </header>
 
-        <main>
+        <main class="content">
 
             <section class="profile">
-                <img class="profile__author-image" src="./images/profile/avatar.png" alt="Аватарка">
+                <img class="profile__author-image" src="./images/profile/avatar.png" alt="Логотип автора">
                 <div class="profile__description">
                     <div class="profile__unbreakable-string">
                         <h1 class="profile__title">Жак-Ив Кусто</h1>
-                        <button class="profile__button-change-descrition"></button>
+                        <button class="profile__buttom-change-descrition" type="button"></button>
                     </div>
                     <p class="profile__subtitle">Исследователь океана</p>
                 </div>
-                <button class="profile__button-add"></button>
+                <button class="profile__buttom-add" type="button"></button>
             </section>
 
             <section class="cards">
-                <ul class="cards__list">
-                    <li class="card">
-                        <img class="card__image" src="./images/cards/photo-example-1.png" alt="Карачаевск">
-                        <div class="card__description">
-                            <h2 class="card__title">Карачаевск</h2>
-                            <button class="card__button-like">
-                                <img src="./images/cards/sign-like.svg" alt="Лайк">
-                            </button>
-                        </div>
-                    </li>
-                    <li class="card">
-                        <img class="card__image" src="./images/cards/photo-example-2.png" alt="Гора Эльбрус">
-                        <div class="card__description">
-                            <h2 class="card__title">Гора Эльбрус</h2>
-                            <button class="card__button-like">
-                                <img src="./images/cards/sign-like.svg" alt="Лайк">
-                            </button>
-                        </div>
-                    </li>
-                    <li class="card">
-                        <img class="card__image" src="./images/cards/photo-example-3.png" alt="Домбай">
-                        <div class="card__description">
-                            <h2 class="card__title">Домбай</h2>
-                            <button class="card__button-like">
-                                <img src="./images/cards/sign-like.svg" alt="Лайк">
-                            </button>
-                        </div>
-                    </li>
-                    <li class="card">
-                        <img class="card__image" src="./images/cards/photo-example-2.png" alt="Гора Эльбрус">
-                        <div class="card__description">
-                            <h2 class="card__title">Гора Эльбрус</h2>
-                            <button class="card__button-like">
-                                <img src="./images/cards/sign-like.svg" alt="Лайк">
-                            </button>
-                        </div>
-                    </li>
-                    <li class="card">
-                        <img class="card__image" src="./images/cards/photo-example-3.png" alt="Домбай">
-                        <div class="card__description">
-                            <h2 class="card__title">Домбай</h2>
-                            <button class="card__button-like">
-                                <img src="./images/cards/sign-like.svg" alt="Лайк">
-                            </button>
-                        </div>
-                    </li>
-                    <li class="card">
-                        <img class="card__image" src="./images/cards/photo-example-1.png" alt="Карачаево-Черкесская Республика">
-                        <div class="card__description">
-                            <h2 class="card__title">Карачаево-Черкесская Республика</h2>
-                            <button class="card__button-like">
-                                <img src="./images/cards/sign-like.svg" alt="Лайк">
-                            </button>
-                        </div>
-                    </li>
-                </ul>
+                <ul class="cards__list"></ul>
             </section>
-
-            <section class="popup">
-                <div class="popup__container">
-                    <button class="popup__button-hide">
-                        <img src="./images/form/button-hide.png" alt="Закрыть">
-                    </button>
-                    <form class="form">
-                        <h2 class="form__heading">Редактировать профиль</h2>
-                        <fieldset class="form__input-container">
-                            <input class="form__input form__input_title" type="text" value="Жак-Ив Кусто" name="author_name">
-                            <input class="form__input form__input_subtitle" type="text" value="Исследователь океана" name="author_description">
-                        </fieldset>
-                        <button class="form__button-update" type="submit">Сохранить</button>
-                    </form>
-                </div>
-            </section>
-
+            
         </main>
 
         <footer class="footer">
             <p class="footer__author">&COPY; 2023 Mesto Russia</p>
         </footer>
 
+        <div class="popup popup-change-profile">
+            <div class="popup__container"> 
+                <button class="popup__buttom-hide popup__buttom-hide-change-profile" type="button"></button>            
+                <form class="form form-profile" name="form-change-profile">
+                    <h2 class="form__heading">Редактировать профиль</h2>
+                    <fieldset class="form__input-container">
+                        <input class="form__input form__input-profile-title" type="text" name="author_name" placeholder="Автор"> 
+                        <input class="form__input form__input-profile-subtitle" type="text" name="author_description" placeholder="Род деятельности">  
+                    </fieldset>
+                    <button class="form__button-update" type="submit">Сохранить</button>
+                </form>
+            </div> 
+        </div>
+
+        <div class="popup popup-add-card">
+            <div class="popup__container"> 
+                <button class="popup__buttom-hide popup__buttom-hide-add-card" type="button"></button>            
+                <form class="form form-card" name="form-add-content">
+                    <h2 class="form__heading">Новое место</h2>
+                    <fieldset class="form__input-container">
+                        <input class="form__input form__input-card-name" type="text"  name="card-name" placeholder="Название"> 
+                        <input class="form__input form__input-card-link" type="url"  name="card-link" placeholder="Ссылка на картинку">  
+                    </fieldset>
+                    <button class="form__button-update" type="submit">Добавить</button>
+                </form>
+            </div> 
+        </div>
+
+        <div class="popup popup-open-image">
+            <div class="popup__container-open-image">
+                <button class="popup__buttom-hide popup__buttom-hide-open-image" type="button"></button>
+                <figure class="popup__figure">
+                    <img class="popup__image" src="#" alt="Изображение карточки">
+                    <figcaption class="popup__title"></figcaption>
+                </figure> 
+            </div>
+        </div>
+        
+        <template class="card-template">
+            <li class="card">
+                <button class="card__buttom-delete" type="button"></button>
+                <img class="card__image" src="#" alt="">
+                <div class="card__description">
+                    <h2 class="card__title"></h2>
+                    <button class="card__buttom-like"></button>
+                </div>
+            </li> 
+        </template>
+
     </div>
 
+    <script src="./scripts/initial-cards-and-constants.js" defer></script> 
+    <script src="./scripts/scripts.js" defer></script>
+    
 </body>
 </html>
