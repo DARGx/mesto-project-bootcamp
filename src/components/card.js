@@ -1,17 +1,29 @@
-import {cardTemplate, inputCardName, inputCardlink, cardContainer, popupAddCard, popupImage, popupTitle, popupOpenImage, formAddCard, configValidation} from './utils'
-import {closePopup,openPopup} from './modal.js'
+import {cardTemplate, inputCardName, inputCardlink, cardContainer, popupAddCard, popupImage, popupTitle, popupOpenImage, formAddCard, configValidation} from './utils.js'
+import {closePopup,openPopup, updateButtonCaption} from './modal.js'
 import {toggleButton} from '../components/validate.js'
-
+import {api} from './api.js'
 
 
 export function handleAddCard(event) {
     event.preventDefault();
+    updateButtonCaption(event.submitter, 'Добавление...');
+
     const newCard = {name: inputCardName.value, link: inputCardlink.value}; 
-    addCard(cardContainer, newCard); 
-    event.target.reset();
-    const buttonSubmitForm = formAddCard.querySelector(configValidation.buttonSubmitSelector);
-    toggleButton(formAddCard, buttonSubmitForm);
-    closePopup(popupAddCard);
+    
+
+    Promise.all([api.postCard(newCard), api.getProfile()])
+    .then(([card,user]) => {
+      const {name, about, _id} = user; 
+      addCard(cardContainer, {name: card.name, link: card.link, massiveLikes: card['likes'], cardId: card['_id'], cardOwner: card['owner'], userAuthorized: user}, 'y');
+
+      event.target.reset();
+      toggleButton(formAddCard, event.submitter);
+      closePopup(popupAddCard);
+
+    })
+    .catch((res) => {console.log(res)})
+    .finally(() => {updateButtonCaption(event.submitter, "Добавить")})
+
   }
   
 export function deleteCard(event) {
@@ -21,31 +33,84 @@ export function deleteCard(event) {
 export function likeCard(event) {
     event.target.classList.toggle('card__button-like_active');
   }
-  
-export function createCard(card) {
+
+export function createCard(card, deleteable) {
+
       const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
       const cardElementImage = cardElement.querySelector('.card__image');
       const cardElementTitle = cardElement.querySelector('.card__title');
       const cardButtonLike = cardElement.querySelector('.card__button-like');
+      const cardElementLikeNumber = cardElement.querySelector('.card__like-number');
       const cardButtonDelete = cardElement.querySelector('.card__button-delete');
-  
+      
       cardElementImage.src = card.link;
       cardElementImage.alt = card.name;
+      cardElementImage.id = card.cardId;
       cardElementTitle.textContent = card.name;
-  
+         
+      cardElementLikeNumber.textContent = card.massiveLikes['length'];
+
+      const listLikes = card.massiveLikes.map((liker) => liker['_id'])
+      cardElementLikeNumber.id = listLikes;
+
+      
+
+      if (listLikes.includes(card.userAuthorized['_id'])) {
+        cardButtonLike.classList.add('card__button-like_active') 
+      }
+
       function openImage() {
         popupImage.alt = card.name;
         popupImage.src = card.link;
         popupTitle.textContent = card.name;
         openPopup(popupOpenImage)
       }
-      cardButtonDelete.addEventListener('click',deleteCard);
-      cardButtonLike.addEventListener('click', likeCard);
+
+      if (deleteable === 'y') { 
+        cardButtonDelete.addEventListener('click', (event) => {
+          const idCurrentCard = event.target.closest('.card').querySelector('.card__image').id;
+          api.deleteCard(idCurrentCard)
+          .then(deleteCard(event))
+          .catch(console.dir)
+        })
+      } else {
+        cardButtonDelete.remove();
+      }
+
+      cardButtonLike.addEventListener('click', (event) => {
+        const idCurrentCard = event.target.closest('.card').querySelector('.card__image').id;
+        const listLikers = event.target.closest('.card').querySelector('.card__like-number').id;
+        api.getProfile()
+        .then((res) => {
+          if (listLikers.split(',').includes(res['_id'])) {
+            api.deleteLike(idCurrentCard)
+            .then((res) => {
+              cardElementLikeNumber.textContent = res['likes']['length'];
+              const listLikes = res['likes'].map((liker) => liker['_id'])
+              cardElementLikeNumber.id = listLikes;
+              likeCard(event);
+            })
+            .catch(console.dir)
+          } else {
+            api.putLike(idCurrentCard)
+            .then((res) => {
+              cardElementLikeNumber.textContent = res['likes']['length'];
+              const listLikes = res['likes'].map((liker) => liker['_id'])
+              cardElementLikeNumber.id = listLikes;
+              likeCard(event);
+            })
+            .catch(console.dir)
+            }
+        })
+      })
+      
       cardElementImage.addEventListener('click', openImage);
   
       return cardElement;
   }
   
-export function addCard(cardsList, currentCard) {
-      return cardsList.prepend(createCard(currentCard));
+export function addCard(cardsList, currentCard, deleteable) {
+      return cardsList.prepend(createCard(currentCard, deleteable));
 }
+
+
