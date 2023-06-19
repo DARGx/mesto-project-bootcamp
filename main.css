@@ -17,11 +17,11 @@
 .cards__list{-moz-column-gap:17px;column-gap:17px;display:grid;grid-template-columns:repeat(auto-fit,282px);grid-template-rows:auto;list-style:none;margin:0;padding:0;row-gap:20px}
 .card{max-width:282px;position:relative}
 .card__image{border-radius:10px 10px 0 0;cursor:pointer;display:block;height:282px;width:282px}
-.card__description{background-color:#fff;border-radius:0 0 10px 10px;display:flex;justify-content:space-between;position:relative}
-.card__title{align-self:center;color:#000;font-size:24px;font-weight:900;height:29px;line-height:29px;margin:25px 0 24px 21px;max-width:189px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.card__button-like{align-self:center;background-color:hsla(0,0%,89%,0);background-image:url(1ad06e85f169668a1f36.svg);background-size:22px 19px;border:0;cursor:pointer;height:19px;margin:0 20px 0 0;padding:0;transition:all .25s ease-in-out;width:22px}.card__button-like:hover{opacity:.5}
+.card__description{align-items:center;background-color:#fff;border-radius:0 0 10px 10px;display:flex;justify-content:space-between}
+.card__title{color:#000;font-size:24px;font-weight:900;height:29px;line-height:29px;margin:25px 0 24px 21px;max-width:189px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.card__button-like{background-color:hsla(0,0%,89%,0);background-image:url(1ad06e85f169668a1f36.svg);background-size:22px 19px;border:0;cursor:pointer;height:19px;max-height:19px;min-height:19px;padding:0;transition:all .25s ease-in-out;width:22px}.card__buttom-like:hover{opacity:.5}
 .card__button-like_active{background-image:url(dd6a61e81552be95f4b7.svg)}
-.card__button-delete{align-self:center;background-color:transparent;background-image:url(ce3b64935accf9b8212e.svg);border:none;cursor:pointer;height:19px;position:absolute;right:20px;top:20px;transition:opacity .25s ease;width:18px}.card__buttom-delete:hover{opacity:.6}
+.card__button-delete{align-self:center;background-color:transparent;background-image:url(ce3b64935accf9b8212e.svg);border:none;cursor:pointer;height:19px;position:absolute;right:20px;top:20px;transition:opacity .25s ease;width:18px}.card__button-delete:hover{opacity:.6}
 .card__like-number{color:#000;font-size:13px;font-weight:400;line-height:16px;margin:0;text-align:center}
 .card__like-area{align-items:center;box-sizing:border-box;display:flex;flex-direction:column;gap:3px;justify-content:space-between;margin:0 15px 0 0;max-height:35px;padding:0}
 .footer{margin:0 auto;max-width:880px;padding:0 0 60px}@media (max-width:930px){.footer{max-width:581px}}@media (max-width:620px){.footer{max-width:282px;padding:0 0 36px}}
@@ -37,7 +37,7 @@
 .popup__button-hide-open-image{position:absolute;right:-40px;top:-40px}@media (max-width:620px){.popup__button-hide-open-image{right:0;top:-36px}}
 .popup-open-image{background-color:rgba(0,0,0,.9)}
 .form{background-color:#fff;border-radius:10px;box-shadow:0 0 25px rgba(0,0,0,.15);display:flex;flex-flow:column;justify-content:center;margin:0 auto;width:calc(15.41667vw + 232.66667px)}
-.form__input-container{border:0;display:grid;gap:24px;grid-template-rows:repeat(auto-fit,-webkit-fill-available);grid-template-rows:repeat(auto-fit,fill);margin:calc(-2.60417vw + 75.33333px) calc(1.45833vw + 17.33333px) calc(.20833vw + 45.33333px);padding:0;position:relative}
+.form__input-container{border:0;display:grid;gap:24px;grid-template-rows:repeat(auto-fit,-webkit-fill-available);grid-template-rows:repeat(auto-fit,fill);margin:calc(-2.60417vw + 75.33333px) calc(1.45833vw + 17.33333px) 0;padding:0;position:relative}
 .form__input{border:0;border-bottom:1px solid rgba(0,0,0,.2);font-size:14px;font-weight:400;line-height:17px;margin:0 0 40px;padding-bottom:8px;padding-top:7px}.form__input:focus{outline-color:#000}.form__input::-webkit-input-placeholder{color:#000;font-size:14px;font-weight:400;line-height:17px;opacity:.2}
 .form__heading{color:#000;font-size:calc(.625vw + 16px);font-weight:900;line-height:calc(.72917vw + 19.66667px);margin:calc(.83333vw + 23.33333px) calc(1.45833vw + 17.33333px) 0}
 .form__button-update{background-color:#000;border:0;border-radius:2px;color:#fff;cursor:pointer;font-size:calc(.41667vw + 12.66667px);height:calc(.41667vw + 44.66667px);line-height:calc(.52083vw + 15.33333px);margin:18px calc(1.45833vw + 17.33333px) calc(1.25vw + 21px);padding:0;position:relative;transition:all .2s ease-in-out;width:calc(12.5vw + 198px)}.form__button-update:hover{opacity:.8}.form__button-update:disabled{background-color:#fff;border:1px solid #000;color:#000;opacity:.2}
