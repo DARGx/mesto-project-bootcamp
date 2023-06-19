@@ -6,6 +6,5 @@
     border: 0;
     gap: 24px;
     position: relative;
-    margin-bottom: calc((100vw - 320px)/(1280 - 320) * (48 - 46) + 46px);
     margin-top: calc((100vw - 320px)/(1280 - 320) * (42 - 67) + 67px);
 }
