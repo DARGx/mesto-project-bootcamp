@@ -8,12 +8,12 @@ import {setProfileData,setAvatarData} from '../components/profile';
 
 
 
-export function InitialData() {
-  Promise.all([api.getCards(), api.getProfile(), api.getAvatar()])
-  .then(([cards, user, avatarka]) => {
+export function initialData() {
+  Promise.all([api.getCards(), api.getProfile()])
+  .then(([cards, user]) => {
     const {name, about, _id} = user; 
     setProfileData(user);
-    setAvatarData(avatarka);
+    setAvatarData(user);
 
     cards.reverse().forEach((card) => {
 
@@ -28,7 +28,7 @@ export function InitialData() {
   .finally(() => {console.log('Попытка загрузки данных завершена')})
 }
 
-InitialData();
+initialData();
 
 function addEventListeners() {
   document.querySelectorAll('.popup__button-hide')

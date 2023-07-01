@@ -32,14 +32,6 @@ const getCards = () => {
   .then(checkResponse);   
 }
 
-function getCardId(idCard) {
-  return fetch(`${config.baseUrl}/cards/${idCard}`, {
-    headers: config.headers,
-    method: 'GET'
-  })
-  .then(checkResponse);   
-}
-
 const postCard = (data) => {
   return fetch(`${config.baseUrl}/cards`,
     {
@@ -77,14 +69,6 @@ function patchProfile(data) {
   .then(checkResponse)   
 } 
 
-const getAvatar = () => {
-  return fetch(`${config.baseUrl}/users/me`, {
-    headers: config.headers,
-    method: 'GET'
-  })
-  .then(checkResponse)   
-}
-
 
 function patchAvatar(data) {
   return fetch(`${config.baseUrl}/users/me/avatar`, {
@@ -118,7 +102,6 @@ const api = {
   getCards,
   patchProfile,
   postCard,
-  getAvatar,
   patchAvatar,
   putLike,
   deleteLike,
