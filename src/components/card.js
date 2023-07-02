@@ -3,23 +3,20 @@ import {closePopup,openPopup, updateButtonCaption} from './modal.js'
 import {toggleButton} from '../components/validate.js'
 import {api} from './api.js'
 
-
-export function handleAddCard(event) {
+  export function handleAddCard(event) {
     event.preventDefault();
     updateButtonCaption(event.submitter, 'Добавление...');
 
     const newCard = {name: inputCardName.value, link: inputCardlink.value}; 
-    
 
-    Promise.all([api.postCard(newCard), api.getProfile()]) 
-    .then(([card,user]) => { 
-      const {name, about, _id} = user;  
-      addCard(cardContainer, {name: card.name, link: card.link, massiveLikes: card['likes'], cardId: card['_id'], cardOwner: card['owner'], userAuthorized: user}, 'y'); 
- 
+    api.postCard(newCard)
+    .then((card) => {
+      const {name, about, _id} = card.owner;  
+      addCard(cardContainer, {name: card.name, link: card.link, massiveLikes: card['likes'], cardId: card['_id'], cardOwner: card['owner'], userAuthorized: card.owner}, 'y');
+
       event.target.reset(); 
       toggleButton(formAddCard, event.submitter); 
-      closePopup(popupAddCard); 
- 
+      closePopup(popupAddCard);  
     }) 
     .catch((res) => {console.log(res)}) 
     .finally(() => {updateButtonCaption(event.submitter, "Добавить")}) 
@@ -62,12 +59,14 @@ export function createCard(card, deleteable) {
         openPopup(popupOpenImage)
       }
 
-      if (deleteable === 'y') { 
-        cardButtonDelete.addEventListener('click', (event) => {
+      if (deleteable === 'y') {
+        cardButtonDelete.addEventListener('click', () => {
           api.deleteCard(card.cardId)
-          .then(deleteCard(event))
-          .catch(console.dir)
-        })
+            .then(() => {
+              cardElement.remove();
+            })
+            .catch(console.dir)
+        });
       } else {
         cardButtonDelete.remove();
       }
